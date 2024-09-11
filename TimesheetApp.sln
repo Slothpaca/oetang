@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetApp.API", "TimesheetApp.API\TimesheetApp.API.csproj", "{CF1340F4-4E08-4AF6-BEA1-FE897E068750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetApp.Client", "TimesheetApp.Client\TimesheetApp.Client.csproj", "{3AF71887-C9B3-4B08-B91A-4A88689F8E37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetApp.API.tests", "TimesheetApp.API.tests\TimesheetApp.API.tests.csproj", "{1BAF75F0-12A5-456C-B73C-328D2C620F9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF1340F4-4E08-4AF6-BEA1-FE897E068750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF1340F4-4E08-4AF6-BEA1-FE897E068750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF1340F4-4E08-4AF6-BEA1-FE897E068750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF1340F4-4E08-4AF6-BEA1-FE897E068750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF71887-C9B3-4B08-B91A-4A88689F8E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF71887-C9B3-4B08-B91A-4A88689F8E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF71887-C9B3-4B08-B91A-4A88689F8E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF71887-C9B3-4B08-B91A-4A88689F8E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BAF75F0-12A5-456C-B73C-328D2C620F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAF75F0-12A5-456C-B73C-328D2C620F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAF75F0-12A5-456C-B73C-328D2C620F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAF75F0-12A5-456C-B73C-328D2C620F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
