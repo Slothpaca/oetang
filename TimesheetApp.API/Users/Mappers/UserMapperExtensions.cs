@@ -1,4 +1,3 @@
-@@ -1,18 +0,0 @@
 ﻿using TimesheetApp.API.Users.Data.Entities;
 using TimesheetApp.API.Users.Models;
 
