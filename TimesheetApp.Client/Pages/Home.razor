@@ -1,0 +1,67 @@
+﻿@page "/"
+@using System.ComponentModel.DataAnnotations
+@using TimesheetApp.Client.ApiServices
+@using TimesheetApp.Client.Models
+@inject IUserApiService UserApiService;
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+<DataAnnotationsValidator/>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="First name" HelperText="Must be higher than 0"
+                              @bind-Value="model.Id" For="@(() => model.Id)"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Get User From API</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+            @if (success)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+                <MudField>@UserModel.Id</MudField>
+                <MudField>@UserModel.FirstName</MudField>
+                <MudField>@UserModel.LastName</MudField>
+                <MudField>@UserModel.Email</MudField>
+            }
+            else
+            {
+                <MudText Color="@Color.Error">
+                    <ValidationSummary />
+                </MudText>
+            }
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.body2" Align="Align.Center">
+            Fill out the form correctly to see the success message.
+        </MudText>
+    </MudItem>
+</MudGrid>
+</EditForm>
+
+@code {
+    GetUserModel model = new GetUserModel();
+    UserModel UserModel = new UserModel();
+    
+    bool success;
+
+    public class GetUserModel
+    {
+        [Required, Range(1, Int32.MaxValue,  ErrorMessage = "The user id must be greater than 0.")]
+        public int Id { get; set; }
+
+    }
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        UserModel = await UserApiService.GetUser(model.Id);
+        success = true;
+        StateHasChanged();
+    }
+}
