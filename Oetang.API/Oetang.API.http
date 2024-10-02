@@ -1,0 +1,30 @@
+@baseUrl = https://localhost:7245
+
+GET {{baseUrl}}/customers/
+
+###
+
+GET {{baseUrl}}/customers/5
+
+###
+
+POST {{baseUrl}}/customers
+Content-Type: application/json
+
+{
+  "name": "Cusfftjhnomer 4"
+}
+
+###
+
+PUT {{baseUrl}}/customers/4
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "customerzzz 4"
+}
+
+###
+
+PATCH {{baseUrl}}/customers/4/updated_name
