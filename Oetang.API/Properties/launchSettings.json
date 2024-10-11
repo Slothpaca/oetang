@@ -9,6 +9,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "OetangOpenAPI": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7245",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
     }
   }
 }

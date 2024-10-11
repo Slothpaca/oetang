@@ -1,0 +1,18 @@
+@baseUrl = https://localhost:7245
+
+GET {{baseUrl}}/users/
+// User meegeven voor authenticatie (emailadres)
+//Oetang-User: Rudy.DeMan@rudistan.com
+
+
+###
+
+POST {{baseUrl}}/users/
+Content-Type: application/json
+
+{
+  "name": "Sheesh",
+  "surname": "Kebab",
+  "emailaddress": "sheesh.kebab@njamnjam.edu"
+}
+

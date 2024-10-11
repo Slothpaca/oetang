@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oetang.API.Database;
 
@@ -11,9 +12,11 @@ using Oetang.API.Database;
 namespace Oetang.API.Database.Migrations
 {
     [DbContext(typeof(OetangDbContext))]
-    partial class OetangDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241008080305_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,9 +123,6 @@ namespace Oetang.API.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("CustomerId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateOnly?>("End")
                         .HasColumnType("date");
 
@@ -134,11 +134,18 @@ namespace Oetang.API.Database.Migrations
                     b.Property<DateOnly>("Start")
                         .HasColumnType("date");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Projects");
+
+                    b.HasDiscriminator<string>("Type").HasValue("Internal");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Oetang.API.Domain.TimeEntry", b =>
@@ -220,8 +227,10 @@ namespace Oetang.API.Database.Migrations
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -233,6 +242,10 @@ namespace Oetang.API.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TimesheetAction");
+
+                    b.HasDiscriminator<string>("Type").HasValue("TimesheetAction");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Oetang.API.Domain.User", b =>
@@ -265,6 +278,65 @@ namespace Oetang.API.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.CustomerProject", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.Project");
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasDiscriminator().HasValue("External");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetApprovedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.HasDiscriminator().HasValue("Approved");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetCommentAddedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.HasDiscriminator().HasValue("Comment Added");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetEntryAddedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.Property<long>("TimeEntryId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("TimeEntryId");
+
+                    b.HasDiscriminator().HasValue("Entry Added");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetOpenedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.HasDiscriminator().HasValue("Opened");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetRejectedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.HasDiscriminator().HasValue("Rejected");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetSubmittedAction", b =>
+                {
+                    b.HasBaseType("Oetang.API.Domain.TimesheetAction");
+
+                    b.HasDiscriminator().HasValue("Submitted");
                 });
 
             modelBuilder.Entity("ConsultantProject", b =>
@@ -307,15 +379,6 @@ namespace Oetang.API.Database.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("Oetang.API.Domain.Project", b =>
-                {
-                    b.HasOne("Oetang.API.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Oetang.API.Domain.TimeEntry", b =>
                 {
                     b.HasOne("Oetang.API.Domain.Project", "Project")
@@ -352,6 +415,26 @@ namespace Oetang.API.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.CustomerProject", b =>
+                {
+                    b.HasOne("Oetang.API.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Oetang.API.Domain.TimesheetEntryAddedAction", b =>
+                {
+                    b.HasOne("Oetang.API.Domain.TimeEntry", "TimeEntry")
+                        .WithMany()
+                        .HasForeignKey("TimeEntryId")
+                        .IsRequired();
+
+                    b.Navigation("TimeEntry");
                 });
 
             modelBuilder.Entity("Oetang.API.Domain.Timesheet", b =>

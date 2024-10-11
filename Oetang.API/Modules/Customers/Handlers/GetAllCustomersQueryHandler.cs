@@ -6,8 +6,7 @@ using Oetang.API.Modules.Customers.Queries;
 
 namespace Oetang.API.Modules.Customers.Handlers
 {
-    public class GetAllCustomersQueryHandler
-        : IRequestHandler<GetAllCustomersQuery, IEnumerable<Customer>>
+    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, IEnumerable<Customer>>
     {
         private readonly OetangDbContext dbContext;
 
@@ -16,8 +15,7 @@ namespace Oetang.API.Modules.Customers.Handlers
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Customer>> Handle(GetAllCustomersQuery query,
-            CancellationToken cancellationToken)
+        public async Task<IEnumerable<Customer>> Handle(GetAllCustomersQuery query, CancellationToken cancellationToken)
         {
             return await dbContext.Customers.ToListAsync();
         }

@@ -7,8 +7,7 @@ using Oetang.API.Modules.Customers.Queries;
 
 namespace Oetang.API.Modules.Customers.Handlers
 {
-    public class GetCustomerDetailsQueryHandler
-        : IRequestHandler<GetCustomerDetailsQuery, CustomerDto>
+    public class GetCustomerDetailsQueryHandler : IRequestHandler<GetCustomerDetailsQuery, CustomerDto>
     {
         private readonly OetangDbContext dbContext;
 
@@ -20,8 +19,7 @@ namespace Oetang.API.Modules.Customers.Handlers
         public async Task<CustomerDto> Handle(GetCustomerDetailsQuery query,
             CancellationToken cancellationToken)
         {
-            var customer = await dbContext.Customers
-                .SingleOrDefaultAsync(customer => customer.Id == query.CustomerId);
+            var customer = await dbContext.Customers.SingleOrDefaultAsync(customer => customer.Id == query.CustomerId);
 
             return CustomerDto.MapFromCustomer(customer);
         }

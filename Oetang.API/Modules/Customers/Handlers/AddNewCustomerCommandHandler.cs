@@ -5,28 +5,23 @@ using Oetang.API.Modules.Customers.Command;
 
 namespace Oetang.API.Modules.Customers.Handlers
 {
-    public class AddNewCustomerCommandHandler
-        : IRequestHandler<AddNewCustomerCommand, Customer>
+    public class AddNewCustomerCommandHandler : IRequestHandler<AddNewCustomerCommand, Customer>
     {
-        private readonly OetangDbContext dbContext;
+        private readonly OetangDbContext _dbContext;
 
         public AddNewCustomerCommandHandler(OetangDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-        public async Task<Customer> Handle(AddNewCustomerCommand command,
-            CancellationToken cancellationToken)
+        public async Task<Customer> Handle(AddNewCustomerCommand command, CancellationToken cancellationToken)
         {
             Validate(command);
 
-            var newCustomer = new Customer
-            {
-                Name = command.Name
-            };
+            var newCustomer = new Customer(command.Name);
 
-            dbContext.Customers.Add(newCustomer);
-            await dbContext.SaveChangesAsync();
+            _dbContext.Customers.Add(newCustomer);
+            await _dbContext.SaveChangesAsync();
 
             return newCustomer;
         }

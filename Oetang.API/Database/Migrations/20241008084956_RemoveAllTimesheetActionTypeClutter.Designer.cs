@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oetang.API.Database;
 
@@ -11,9 +12,11 @@ using Oetang.API.Database;
 namespace Oetang.API.Database.Migrations
 {
     [DbContext(typeof(OetangDbContext))]
-    partial class OetangDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241008084956_RemoveAllTimesheetActionTypeClutter")]
+    partial class RemoveAllTimesheetActionTypeClutter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

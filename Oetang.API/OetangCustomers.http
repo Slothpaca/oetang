@@ -12,7 +12,7 @@ POST {{baseUrl}}/customers
 Content-Type: application/json
 
 {
-  "name": "Cusfftjhnomer 4"
+  "name": "Customer 1"
 }
 
 ###

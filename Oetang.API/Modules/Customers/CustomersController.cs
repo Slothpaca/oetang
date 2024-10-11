@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
-using Oetang.API.Database;
-using Oetang.API.Domain;
 using Oetang.API.Modules.Customers.Command;
 using Oetang.API.Modules.Customers.Queries;
 
@@ -40,6 +37,20 @@ namespace Oetang.API.Modules.Customers
         {
             var newCustomer = await _mediator.Send(command);
             return Ok(newCustomer);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCustomer(long id, UpdateCustomerCommand command)
+        {
+            // Binnen de swagger http requests hoeft ("CustomerId": 0) niet aangepast te worden, id uit de request overschrijft die waarde.
+            command.CustomerId = id;
+
+            var updatedCustomer = await _mediator.Send(command);
+            if (updatedCustomer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(updatedCustomer);
         }
     }
 }
