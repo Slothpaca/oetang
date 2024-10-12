@@ -2,6 +2,7 @@
 {
     public class Project
     {
+        // Define all properties.
         public long Id { get; set; }
         public string Name { get; set; }
         public DateOnly Start { get; set; }

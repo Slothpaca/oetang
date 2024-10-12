@@ -1,7 +1,6 @@
 ﻿// Include needed namespaces.
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Oetang.API.Domain;
 
 

@@ -1,5 +1,4 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-namespace Oetang.API.Domain
+﻿namespace Oetang.API.Domain
 {
     public class Department
     {
@@ -8,7 +7,6 @@ namespace Oetang.API.Domain
 
         // If a constructor is defined explicitly (see "public Department" constructor under the "private Department" constructor),
         // then you are obligated to define a default constructor in code (does not have to be public, can be private).
-
 
         private Department(){} // Defining the default constructor.
 

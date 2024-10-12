@@ -2,6 +2,7 @@
 {
     public class Timesheet
     {
+        // Define all properties.
         public long Id { get; set; }
 
         public Consultant Consultant { get; set; }

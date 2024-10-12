@@ -8,7 +8,6 @@
         // If a constructor is defined explicitly (see "public User" constructor under the "private User" constructor),
         // then you are obligated to define a default constructor in code (does not have to be public, can be private).
 
-
         private User() { } // Defining the default constructor.
 
 

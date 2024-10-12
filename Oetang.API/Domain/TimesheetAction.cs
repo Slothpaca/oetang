@@ -2,6 +2,7 @@
 {
     public class TimesheetAction
     {
+        // Define all properties.
         public long Id { get; set; }
 
         public string? Comment { get; set; }

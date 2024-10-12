@@ -8,7 +8,6 @@
         // If a constructor is defined explicitly (see "public Customer" constructor under the "private Customer" constructor),
         // then you are obligated to define a default constructor in code (does not have to be public, can be private).
 
-
         private Customer(){ } // Defining the default constructor.
 
         public Customer(string name) // Defining a Customer constructor.

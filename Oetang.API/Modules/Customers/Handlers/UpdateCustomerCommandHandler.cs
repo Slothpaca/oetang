@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Oetang.API.Database;
 using Oetang.API.Domain;
 using Oetang.API.Modules.Customers.Command;
-using System.ComponentModel;
 
 
 // (info) Namespaces are used organize code and group related classes, interfaces, and other types together.
 namespace Oetang.API.Modules.Customers.Handlers
 {
-    // (info) Class is a blueprint for creating the object => Here it is "UpdateCustomerCommandHandler".
+    // Handler for processing the UpdateCustomerCommand.
+    // Implements IRequestHandler, which handles the input command (UpdateCustomerCommand) and outputs a Customer object (Customer).
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
     {
         
